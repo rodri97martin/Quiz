@@ -8,20 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		D40B07682194B7D4003FAB18 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40B07672194B7D4003FAB18 /* AppDelegate.swift */; };
-		D40B076A2194B7D4003FAB18 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40B07692194B7D4003FAB18 /* ViewController.swift */; };
 		D40B076D2194B7D4003FAB18 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D40B076B2194B7D4003FAB18 /* Main.storyboard */; };
 		D40B076F2194B7D5003FAB18 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D40B076E2194B7D5003FAB18 /* Assets.xcassets */; };
 		D40B07722194B7D5003FAB18 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D40B07702194B7D5003FAB18 /* LaunchScreen.storyboard */; };
+		D40B077A2194C1BF003FAB18 /* AutoresTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40B07792194C1BF003FAB18 /* AutoresTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D40B07642194B7D4003FAB18 /* Quiz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Quiz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D40B07672194B7D4003FAB18 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D40B07692194B7D4003FAB18 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D40B076C2194B7D4003FAB18 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D40B076E2194B7D5003FAB18 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D40B07712194B7D5003FAB18 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D40B07732194B7D5003FAB18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D40B07792194C1BF003FAB18 /* AutoresTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoresTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,7 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				D40B07672194B7D4003FAB18 /* AppDelegate.swift */,
-				D40B07692194B7D4003FAB18 /* ViewController.swift */,
+				D40B07792194C1BF003FAB18 /* AutoresTableViewController.swift */,
 				D40B076B2194B7D4003FAB18 /* Main.storyboard */,
 				D40B076E2194B7D5003FAB18 /* Assets.xcassets */,
 				D40B07702194B7D5003FAB18 /* LaunchScreen.storyboard */,
@@ -135,7 +135,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D40B076A2194B7D4003FAB18 /* ViewController.swift in Sources */,
+				D40B077A2194C1BF003FAB18 /* AutoresTableViewController.swift in Sources */,
 				D40B07682194B7D4003FAB18 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
