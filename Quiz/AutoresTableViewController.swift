@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct Item: Codable {
+struct Usuario: Codable {
     
     let id: Int
     let isAdmin: Bool?
@@ -18,9 +18,9 @@ struct Item: Codable {
 
 class AutoresTableViewController: UITableViewController {
     
-    let URLBASE = "https://quiz2019.herokuapp.com/api/users?token=8fda199c75cb200b0f85"
+    let URLBASE = "https://quiz2019.herokuapp.com/api/users?token=f2079b1d0cee0c8adbf2"
     
-    var items = [Item]()
+    var items = [Usuario]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,7 +70,7 @@ class AutoresTableViewController: UITableViewController {
         DispatchQueue.global().async {
             if let data = try? Data(contentsOf: url) {
                 
-                if let items = try? JSONDecoder().decode([Item].self, from: data) {
+                if let items = try? JSONDecoder().decode([Usuario].self, from: data) {
 
                     DispatchQueue.main.async {
                         self.items = items

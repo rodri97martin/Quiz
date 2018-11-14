@@ -8,12 +8,6 @@
 
 import UIKit
 
-struct Author: Codable {
-    let id: Int
-    let isAdmin: Bool
-    let username: String
-}
-
 struct Attachment: Codable {
     let filename: String
     let mime: String
@@ -24,13 +18,13 @@ struct Quiz: Codable {
     
     let id: Int
     let question: String
-    let author: Author?
+    let author: Usuario?
     let attachment: Attachment
     let favourite: Bool
     let tips: [String]
 }
 
-struct Item_Quizzes: Codable {
+struct Quizzes_Page: Codable {
     let quizzes: [Quiz]
     let pageno: Int
     let nextUrl: String
@@ -38,6 +32,8 @@ struct Item_Quizzes: Codable {
 
 class QuizzesTableViewController: UITableViewController {
 
+    let URLBASE = "https://quiz2019.herokuapp.com/api/quizzes?token=f2079b1d0cee0c8adbf2"
+    var imagesCache = [String:UIImage]()
     var quizzes = [Quiz]()
     
     override func viewDidLoad() {
@@ -48,6 +44,8 @@ class QuizzesTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        downloadAllQuizzes(URLBASE)
     }
 
     // MARK: - Table view data source
@@ -62,15 +60,73 @@ class QuizzesTableViewController: UITableViewController {
         return quizzes.count
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Show Quizzes", for: indexPath)
 
         // Configure the cell...
+        
+        let quiz = quizzes[indexPath.row]
+        
+        cell.textLabel?.text = quiz.question
+        
+        if let img = imagesCache[quiz.attachment.filename] {
+            
+            cell.imageView?.image = img
+            
+        } else {
+            
+            cell.imageView?.image = UIImage(named: "none")
+            download(quiz.attachment.url, index: indexPath)
+            
+        }
+        
 
         return cell
     }
-    */
+    
+    func downloadAllQuizzes(_ url: String){
+        guard let url = URL(string: url) else {
+            print("Error 1")
+            return
+        }
+        
+        DispatchQueue.global().async {
+            if let data = try? Data(contentsOf: url) {
+                
+                if let quizzesInThisPage = try? JSONDecoder().decode(Quizzes_Page.self, from: data) {
+                    
+                    
+                    DispatchQueue.main.async {
+                        
+                        for i in quizzesInThisPage.quizzes {
+                            self.quizzes.append(i)
+                            self.tableView.reloadData()
+                        }
+                        if quizzesInThisPage.nextUrl != "" {
+                            self.downloadAllQuizzes(quizzesInThisPage.nextUrl)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func download(_ urls: String, index indexpath:IndexPath ) {
+        
+        DispatchQueue.global().async {
+            
+            if let url = URL(string: urls), let data = try? Data(contentsOf: url), let img = UIImage(data: data) {
+                
+                DispatchQueue.main.async {
+                    
+                    self.imagesCache[urls] = img
+                    self.tableView.reloadRows(at: [indexpath], with: .fade)
+                }
+                
+            }
+        }
+    }
 
     /*
     // Override to support conditional editing of the table view.
