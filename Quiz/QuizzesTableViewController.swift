@@ -1,26 +1,44 @@
 //
-//  AutoresTableViewController.swift
+//  QuizzesTableViewController.swift
 //  Quiz
 //
-//  Created by Rodrigo Martín Martín on 08/11/2018.
+//  Created by Rodrigo Martín Martín on 14/11/2018.
 //  Copyright © 2018 Rodri. All rights reserved.
 //
 
 import UIKit
 
-struct Item: Codable {
-    
+struct Author: Codable {
     let id: Int
-    let isAdmin: Bool?
+    let isAdmin: Bool
     let username: String
-    
 }
 
-class AutoresTableViewController: UITableViewController {
+struct Attachment: Codable {
+    let filename: String
+    let mime: String
+    let url: String
+}
+
+struct Quiz: Codable {
     
-    let URLBASE = "https://quiz2019.herokuapp.com/api/users?token=8fda199c75cb200b0f85"
-    
-    var items = [Item]()
+    let id: Int
+    let question: String
+    let author: Author?
+    let attachment: Attachment
+    let favourite: Bool
+    let tips: [String]
+}
+
+struct Item_Quizzes: Codable {
+    let quizzes: [Quiz]
+    let pageno: Int
+    let nextUrl: String
+}
+
+class QuizzesTableViewController: UITableViewController {
+
+    var quizzes = [Quiz]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,8 +48,6 @@ class AutoresTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        
-        download()
     }
 
     // MARK: - Table view data source
@@ -43,48 +59,18 @@ class AutoresTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return items.count
+        return quizzes.count
     }
 
-    
+    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Autor Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
         // Configure the cell...
 
-        let author = items[indexPath.row]
-        
-        cell.textLabel?.text = author.username
-        
         return cell
     }
-    
-    
-    func download() {
-        
-        guard let url = URL(string: URLBASE) else {
-            print("Error 1")
-            return
-        }
-
-        DispatchQueue.global().async {
-            if let data = try? Data(contentsOf: url) {
-                
-                if let items = try? JSONDecoder().decode([Item].self, from: data) {
-
-                    DispatchQueue.main.async {
-                        self.items = items
-                        self.tableView.reloadData()
-                    }
-                    
-                } else {
-                    print("Error 3")
-                }
-            } else {
-                print("Error 2")
-            }
-        }
-    }
+    */
 
     /*
     // Override to support conditional editing of the table view.
@@ -121,25 +107,14 @@ class AutoresTableViewController: UITableViewController {
     }
     */
 
+    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == "Autor" {
-            
-            if let avc = segue.destination as? AutorViewController {
-                
-                if let sr = tableView.indexPathForSelectedRow {
-                    
-                    avc.autor = items[sr.row].username
-                    avc.id = items[sr.row].id
-                    avc.isAdmin = items[sr.row].isAdmin
-                    
-                }
-            }
-            
-        }
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
     }
+    */
 
 }

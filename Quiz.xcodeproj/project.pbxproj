@@ -12,6 +12,8 @@
 		D40B076F2194B7D5003FAB18 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D40B076E2194B7D5003FAB18 /* Assets.xcassets */; };
 		D40B07722194B7D5003FAB18 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D40B07702194B7D5003FAB18 /* LaunchScreen.storyboard */; };
 		D40B077A2194C1BF003FAB18 /* AutoresTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40B07792194C1BF003FAB18 /* AutoresTableViewController.swift */; };
+		D4673FFC219C78220087E943 /* AutorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4673FFB219C78220087E943 /* AutorViewController.swift */; };
+		D4EB54E0219C96F000892C18 /* QuizzesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EB54DF219C96F000892C18 /* QuizzesTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		D40B07712194B7D5003FAB18 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D40B07732194B7D5003FAB18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D40B07792194C1BF003FAB18 /* AutoresTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoresTableViewController.swift; sourceTree = "<group>"; };
+		D4673FFB219C78220087E943 /* AutorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutorViewController.swift; sourceTree = "<group>"; };
+		D4EB54DF219C96F000892C18 /* QuizzesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizzesTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,8 @@
 			children = (
 				D40B07672194B7D4003FAB18 /* AppDelegate.swift */,
 				D40B07792194C1BF003FAB18 /* AutoresTableViewController.swift */,
+				D4673FFB219C78220087E943 /* AutorViewController.swift */,
+				D4EB54DF219C96F000892C18 /* QuizzesTableViewController.swift */,
 				D40B076B2194B7D4003FAB18 /* Main.storyboard */,
 				D40B076E2194B7D5003FAB18 /* Assets.xcassets */,
 				D40B07702194B7D5003FAB18 /* LaunchScreen.storyboard */,
@@ -136,6 +142,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D40B077A2194C1BF003FAB18 /* AutoresTableViewController.swift in Sources */,
+				D4673FFC219C78220087E943 /* AutorViewController.swift in Sources */,
+				D4EB54E0219C96F000892C18 /* QuizzesTableViewController.swift in Sources */,
 				D40B07682194B7D4003FAB18 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
