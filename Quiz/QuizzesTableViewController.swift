@@ -62,26 +62,23 @@ class QuizzesTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Show Quizzes", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Show Quizzes", for: indexPath) as! QuizTableViewCell
 
         // Configure the cell...
         
         let quiz = quizzes[indexPath.row]
         
-        cell.textLabel?.text = quiz.question
+        cell.questionLabel.text = quiz.question
+        cell.autorLabel.text = quiz.author?.username ?? "Unknown"
         
-        if let img = imagesCache[quiz.attachment.filename] {
-            
-            cell.imageView?.image = img
-            
+        if let img = imagesCache[quiz.attachment.url] {
+
+            cell.quizImageView.image = img
         } else {
             
-            cell.imageView?.image = UIImage(named: "none")
             download(quiz.attachment.url, index: indexPath)
-            
         }
         
-
         return cell
     }
     
@@ -112,18 +109,19 @@ class QuizzesTableViewController: UITableViewController {
         }
     }
     
-    func download(_ urls: String, index indexpath:IndexPath ) {
+    func download(_ urls: String, index indexpath: IndexPath) {
         
         DispatchQueue.global().async {
             
-            if let url = URL(string: urls), let data = try? Data(contentsOf: url), let img = UIImage(data: data) {
+            if let url = URL(string: urls),
+                let data = try? Data(contentsOf: url),
+                let img = UIImage(data: data) {
                 
                 DispatchQueue.main.async {
                     
                     self.imagesCache[urls] = img
                     self.tableView.reloadRows(at: [indexpath], with: .fade)
                 }
-                
             }
         }
     }
@@ -163,14 +161,20 @@ class QuizzesTableViewController: UITableViewController {
     }
     */
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "Show Quiz" {
+            if let qvc = segue.destination as? QuizViewController {
+                
+                let quiz = quizzes[(tableView.indexPathForSelectedRow?.row)!]
+                
+                qvc.quiz = quiz
+                qvc.img = imagesCache[quiz.attachment.url]
+            }
+        }
+        
     }
-    */
+    
 
 }
