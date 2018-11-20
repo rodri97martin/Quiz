@@ -9,7 +9,6 @@
 import UIKit
 
 struct quizChecked: Codable {
-    
     let quizId: Int
     let answer: String
     let result: Bool
@@ -75,10 +74,7 @@ class QuizViewController: UIViewController {
             if let ttvc = segue.destination as? TipsTableViewController {
                 
                 ttvc.tips = quiz.tips!
-            
             }
         }
     }
-    
-
 }

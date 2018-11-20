@@ -9,13 +9,11 @@
 import UIKit
 
 struct randomPlay: Codable {
-    
     let quiz: Quiz
     let score: Int
 }
 
 struct randomQuizChecked: Codable {
-    
     let answer: String
     let quizId: Int
     let result: Bool
@@ -26,8 +24,6 @@ class JugarTodosViewController: UIViewController {
 
     let URLNEW = "https://quiz2019.herokuapp.com/api/quizzes/randomPlay/new?token=f2079b1d0cee0c8adbf2"
     let URLNEXT = "https://quiz2019.herokuapp.com/api/quizzes/randomPlay/next?token=f2079b1d0cee0c8adbf2"
-    
-    var isGameFinished = false
     
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var answerTextField: UITextField!
@@ -91,21 +87,14 @@ class JugarTodosViewController: UIViewController {
                         if quiz.result == true {
                             
                             self.play(self.URLNEXT)
-                            
-                            
                         } else {
                             
                             ac.showAlert("Final score: \(quiz.score)")
                             self.present(ac.alert!, animated: true)
                             self.play(self.URLNEW)
-                            
                         }
                     }
-                }else {
-                    print("Error 3")
                 }
-            } else {
-                print("Error 2")
             }
         }
     }

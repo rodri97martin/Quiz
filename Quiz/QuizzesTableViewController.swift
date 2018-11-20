@@ -15,7 +15,6 @@ struct Attachment: Codable {
 }
 
 struct Quiz: Codable {
-    
     let id: Int
     let question: String
     let author: Usuario?
