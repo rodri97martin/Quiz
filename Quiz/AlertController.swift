@@ -8,13 +8,14 @@
 
 import UIKit
 
-class AlertaIncorrecta {
+class AlertController {
     
     var alert: UIAlertController?
     
-    func showAlert() {
+    func showAlert(_ title: String) {
         
-        alert = UIAlertController(title: "Respuesta incorrecta", message: nil, preferredStyle: .alert)
+        alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
         alert?.addAction(UIAlertAction(title: "OK", style: .default))
     }
+    
 }

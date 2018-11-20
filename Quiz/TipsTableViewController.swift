@@ -1,31 +1,25 @@
 //
-//  AutoresTableViewController.swift
+//  TipsTableViewController.swift
 //  Quiz
 //
-//  Created by Rodrigo Martín Martín on 08/11/2018.
+//  Created by Rodrigo Martín Martín on 20/11/2018.
 //  Copyright © 2018 Rodri. All rights reserved.
 //
 
 import UIKit
 
-struct Usuario: Codable {
-    
-    let id: Int?
-    let isAdmin: Bool?
-    let username: String
-    
-}
+class TipsTableViewController: UITableViewController {
 
-class AutoresTableViewController: UITableViewController {
-    
-    let URLBASE = "https://quiz2019.herokuapp.com/api/users?token=f2079b1d0cee0c8adbf2"
-    
-    var items = [Usuario]()
+    var tips = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        download()
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
@@ -37,42 +31,19 @@ class AutoresTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return items.count
+        return tips.count
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Autor Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell Tips", for: indexPath)
 
         // Configure the cell...
 
-        let author = items[indexPath.row]
-        
-        cell.textLabel?.text = author.username
-        cell.imageView?.image = UIImage(named: "monigote")
+        cell.textLabel?.text = tips[indexPath.row]
         
         return cell
     }
-    
-    
-    func download() {
-        
-        guard let url = URL(string: URLBASE) else { return }
-        
-        DispatchQueue.global().async {
-            
-            if let data = try? Data(contentsOf: url) {
-                
-                if let items = try? JSONDecoder().decode([Usuario].self, from: data) {
-                    
-                    DispatchQueue.main.async {
-                        self.items = items
-                        self.tableView.reloadData()
-                    }
-                }
-            }
-        }
-    }
+
 
     /*
     // Override to support conditional editing of the table view.
@@ -109,24 +80,14 @@ class AutoresTableViewController: UITableViewController {
     }
     */
 
+    /*
     // MARK: - Navigation
 
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == "Autor" {
-            
-            if let avc = segue.destination as? AutorViewController {
-                
-                if let sr = tableView.indexPathForSelectedRow {
-                    
-                    avc.autor = items[sr.row].username
-                    avc.id = items[sr.row].id
-                    avc.isAdmin = items[sr.row].isAdmin
-                    
-                }
-            }
-            
-        }
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
     }
+    */
 
 }

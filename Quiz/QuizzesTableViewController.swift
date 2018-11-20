@@ -21,7 +21,7 @@ struct Quiz: Codable {
     let author: Usuario?
     let attachment: Attachment
     let favourite: Bool
-    let tips: [String]
+    let tips: [String]?
 }
 
 struct Quizzes_Page: Codable {
@@ -35,6 +35,8 @@ class QuizzesTableViewController: UITableViewController {
     let URLBASE = "https://quiz2019.herokuapp.com/api/quizzes?token=f2079b1d0cee0c8adbf2"
     var imagesCache = [String:UIImage]()
     var quizzes = [Quiz]()
+    
+    @IBOutlet weak var refresh: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,17 +84,21 @@ class QuizzesTableViewController: UITableViewController {
         return cell
     }
     
+    @IBAction func refresh(_ sender: UIBarButtonItem) {
+        
+        imagesCache.removeAll()
+        quizzes.removeAll()
+        downloadAllQuizzes(URLBASE)
+    }
+    
+    
     func downloadAllQuizzes(_ url: String){
-        guard let url = URL(string: url) else {
-            print("Error 1")
-            return
-        }
+        guard let url = URL(string: url) else { return }
         
         DispatchQueue.global().async {
             if let data = try? Data(contentsOf: url) {
                 
                 if let quizzesInThisPage = try? JSONDecoder().decode(Quizzes_Page.self, from: data) {
-                    
                     
                     DispatchQueue.main.async {
                         
@@ -100,6 +106,7 @@ class QuizzesTableViewController: UITableViewController {
                             self.quizzes.append(i)
                             self.tableView.reloadData()
                         }
+                        
                         if quizzesInThisPage.nextUrl != "" {
                             self.downloadAllQuizzes(quizzesInThisPage.nextUrl)
                         }
@@ -173,7 +180,6 @@ class QuizzesTableViewController: UITableViewController {
                 qvc.img = imagesCache[quiz.attachment.url]
             }
         }
-        
     }
     
 
