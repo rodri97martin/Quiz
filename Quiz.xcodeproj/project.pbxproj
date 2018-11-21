@@ -14,6 +14,7 @@
 		D40B077A2194C1BF003FAB18 /* AutoresTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40B07792194C1BF003FAB18 /* AutoresTableViewController.swift */; };
 		D458E73021A4872500A34A6D /* TipsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D458E72F21A4872500A34A6D /* TipsTableViewController.swift */; };
 		D4673FFC219C78220087E943 /* AutorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4673FFB219C78220087E943 /* AutorViewController.swift */; };
+		D4B2AC2C21A5539B007D077E /* Random10ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B2AC2B21A5539B007D077E /* Random10ViewController.swift */; };
 		D4CC087E21A3197100D6112B /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CC087D21A3197100D6112B /* AlertController.swift */; };
 		D4D8C9FC21A471940033C0C1 /* JugarTodosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D8C9FB21A471940033C0C1 /* JugarTodosViewController.swift */; };
 		D4EA7BED21A2C4A400CE7203 /* QuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA7BEC21A2C4A400CE7203 /* QuizTableViewCell.swift */; };
@@ -31,6 +32,7 @@
 		D40B07792194C1BF003FAB18 /* AutoresTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoresTableViewController.swift; sourceTree = "<group>"; };
 		D458E72F21A4872500A34A6D /* TipsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipsTableViewController.swift; sourceTree = "<group>"; };
 		D4673FFB219C78220087E943 /* AutorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutorViewController.swift; sourceTree = "<group>"; };
+		D4B2AC2B21A5539B007D077E /* Random10ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Random10ViewController.swift; sourceTree = "<group>"; };
 		D4CC087D21A3197100D6112B /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 		D4D8C9FB21A471940033C0C1 /* JugarTodosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JugarTodosViewController.swift; sourceTree = "<group>"; };
 		D4EA7BEC21A2C4A400CE7203 /* QuizTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizTableViewCell.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 				D4EB54DF219C96F000892C18 /* QuizzesTableViewController.swift */,
 				D4EA7BEC21A2C4A400CE7203 /* QuizTableViewCell.swift */,
 				D4EA7BEE21A2DB4F00CE7203 /* QuizViewController.swift */,
+				D4B2AC2B21A5539B007D077E /* Random10ViewController.swift */,
 				D458E72F21A4872500A34A6D /* TipsTableViewController.swift */,
 				D40B076B2194B7D4003FAB18 /* Main.storyboard */,
 				D40B076E2194B7D5003FAB18 /* Assets.xcassets */,
@@ -158,6 +161,7 @@
 			files = (
 				D40B077A2194C1BF003FAB18 /* AutoresTableViewController.swift in Sources */,
 				D458E73021A4872500A34A6D /* TipsTableViewController.swift in Sources */,
+				D4B2AC2C21A5539B007D077E /* Random10ViewController.swift in Sources */,
 				D4673FFC219C78220087E943 /* AutorViewController.swift in Sources */,
 				D4D8C9FC21A471940033C0C1 /* JugarTodosViewController.swift in Sources */,
 				D4CC087E21A3197100D6112B /* AlertController.swift in Sources */,
