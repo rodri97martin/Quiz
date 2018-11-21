@@ -56,7 +56,7 @@ class JugarTodosViewController: UIViewController {
                         self.scoreLabel.text = "Score: \(game.score)"
                         self.answerTextField.text = ""
                         
-                        if let url = URL(string: game.quiz.attachment.url),
+                        if let url = URL(string: game.quiz.attachment?.url ?? ""),
                             let data = try? Data(contentsOf: url),
                             let img = UIImage(data: data) {
                             

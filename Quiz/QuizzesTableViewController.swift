@@ -18,7 +18,7 @@ struct Quiz: Codable {
     let id: Int
     let question: String
     let author: Usuario?
-    let attachment: Attachment
+    let attachment: Attachment?
     let favourite: Bool
     let tips: [String]?
 }
@@ -26,7 +26,7 @@ struct Quiz: Codable {
 struct Quizzes_Page: Codable {
     let quizzes: [Quiz]
     let pageno: Int
-    let nextUrl: String
+    let nextUrl: String?
 }
 
 class QuizzesTableViewController: UITableViewController {
@@ -72,12 +72,13 @@ class QuizzesTableViewController: UITableViewController {
         cell.questionLabel.text = quiz.question
         cell.autorLabel.text = quiz.author?.username ?? "Unknown"
         
-        if let img = imagesCache[quiz.attachment.url] {
+        if let img = imagesCache[quiz.attachment?.url ?? ""] {
 
             cell.quizImageView.image = img
         } else {
             
-            download(quiz.attachment.url, index: indexPath)
+            cell.quizImageView.image = UIImage(named: "noImage")
+            download(quiz.attachment?.url ?? "", index: indexPath)
         }
         
         return cell
@@ -107,7 +108,8 @@ class QuizzesTableViewController: UITableViewController {
                         }
                         
                         if quizzesInThisPage.nextUrl != "" {
-                            self.downloadAllQuizzes(quizzesInThisPage.nextUrl)
+                            print("Going to next URL")
+                            self.downloadAllQuizzes(quizzesInThisPage.nextUrl!)
                         }
                     }
                 }
@@ -176,7 +178,7 @@ class QuizzesTableViewController: UITableViewController {
                 let quiz = quizzes[(tableView.indexPathForSelectedRow?.row)!]
                 
                 qvc.quiz = quiz
-                qvc.img = imagesCache[quiz.attachment.url]
+                qvc.img = imagesCache[quiz.attachment?.url ?? ""]
             }
         }
     }

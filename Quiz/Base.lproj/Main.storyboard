@@ -18,6 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="separatorColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Autor Cell" textLabel="o6B-Wi-G8n" style="IBUITableViewCellStyleDefault" id="LWI-dl-IBz">
                                 <rect key="frame" x="0.0" y="28" width="414" height="44"/>
@@ -27,7 +28,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="o6B-Wi-G8n">
-                                            <rect key="frame" x="20" y="0.0" width="356" height="43.666666666666664"/>
+                                            <rect key="frame" x="15" y="0.0" width="361" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -35,6 +36,8 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
                                     <segue destination="9xt-OA-ggx" kind="show" identifier="Autor" id="sFr-4m-Hc8"/>
                                 </connections>
@@ -491,7 +494,7 @@
                                     <constraint firstAttribute="width" constant="54" id="Lmh-lh-aGp"/>
                                     <constraint firstAttribute="height" constant="30" id="VRH-cA-wpn"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Aceptar"/>
                                 <connections>
                                     <action selector="accept:" destination="xpL-qt-Ca5" eventType="touchUpInside" id="lqQ-rq-Iv5"/>
                                 </connections>
@@ -543,7 +546,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ywr-Ji-nJm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1097" y="860"/>
+            <point key="canvasLocation" x="1095.6521739130435" y="859.23913043478262"/>
         </scene>
         <!--10-->
         <scene sceneID="A85-2M-Ch1">
