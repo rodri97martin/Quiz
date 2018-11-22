@@ -20,7 +20,7 @@ struct randomQuizChecked: Codable {
     let score: Int
 }
 
-class JugarTodosViewController: UIViewController {
+class JugarTodosViewController: UIViewController, UITextFieldDelegate {
 
     let URLNEW = "https://quiz2019.herokuapp.com/api/quizzes/randomPlay/new?token=f2079b1d0cee0c8adbf2"
     let URLNEXT = "https://quiz2019.herokuapp.com/api/quizzes/randomPlay/next?token=f2079b1d0cee0c8adbf2"
@@ -37,8 +37,21 @@ class JugarTodosViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
+        self.answerTextField.delegate = self
         play(URLNEW)
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        answerTextField.resignFirstResponder()
+        playNext(acceptButton)
+        return true
+    }
+    
+    @IBAction func hideKeyboard(_ sender: UITapGestureRecognizer) {
+        answerTextField.endEditing(true)
+    }
+    
     
     func play(_ url: String) {
         
@@ -77,7 +90,7 @@ class JugarTodosViewController: UIViewController {
         
         let URL_CHECK = "https://quiz2019.herokuapp.com/api/quizzes/randomPlay/check?token=f2079b1d0cee0c8adbf2&answer=\(answerTextField.text ?? "")"
         
-        guard let url = URL(string: URL_CHECK) else { return }
+        guard let url = URL(string: URL_CHECK.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!) else { return }
         
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         DispatchQueue.global().async {

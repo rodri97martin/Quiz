@@ -18,7 +18,7 @@ struct Random10Quiz: Codable {
     let tips: [String]
 }
 
-class Random10ViewController: UIViewController {
+class Random10ViewController: UIViewController, UITextFieldDelegate {
 
     let URLBASE = "https://quiz2019.herokuapp.com/api/quizzes/random10wa?token=f2079b1d0cee0c8adbf2"
     var quizzes = [Random10Quiz]()
@@ -37,8 +37,21 @@ class Random10ViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
+        self.answerTextField.delegate = self
         downloadQuizzes()
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        answerTextField.resignFirstResponder()
+        accept(acceptButton)
+        return true
+    }
+    
+    @IBAction func hideKeyboard(_ sender: UITapGestureRecognizer) {
+        answerTextField.endEditing(true)
+    }
+    
     
     func downloadQuizzes() {
         

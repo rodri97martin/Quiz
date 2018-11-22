@@ -14,7 +14,7 @@ struct quizChecked: Codable {
     let result: Bool
 }
 
-class QuizViewController: UIViewController {
+class QuizViewController: UIViewController, UITextFieldDelegate {
 
     var quiz: Quiz!
     var img: UIImage?
@@ -30,7 +30,21 @@ class QuizViewController: UIViewController {
         self.title = "Responda:"
         questionLabel.text = quiz?.question
         quizImageView.image = img
+        
+        self.answerTextField.delegate = self
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        answerTextField.resignFirstResponder()
+        checkAnswer(checkButton)
+        return true
+    }
+    
+    @IBAction func hideKeyboard(_ sender: UITapGestureRecognizer) {
+        self.answerTextField.endEditing(true)
+    }
+    
     
     @IBAction func checkAnswer(_ sender: UIButton) {
         
