@@ -34,6 +34,7 @@ class QuizzesTableViewController: UITableViewController {
     let URLBASE = "https://quiz2019.herokuapp.com/api/quizzes?token=f2079b1d0cee0c8adbf2"
     var imagesCache = [String:UIImage]()
     var quizzes = [Quiz]()
+    var statusCode = false
     
     @IBOutlet weak var refresh: UIBarButtonItem!
     @IBOutlet weak var favButton: UIButton!
@@ -83,7 +84,7 @@ class QuizzesTableViewController: UITableViewController {
             download(quiz.attachment?.url ?? "", index: indexPath)
         }
         
-        cell.favouriteButton.tag = indexPath.row
+        cell.id = indexPath.row
         
         if quiz.favourite == false {
             cell.favouriteButton.imageView?.image = UIImage(named: "star2")
@@ -96,14 +97,20 @@ class QuizzesTableViewController: UITableViewController {
     
     @IBAction func setFavourite(_ sender: UIButton) {
         
-        print("Changing \(sender.tag) \(quizzes[sender.tag].favourite)")
-        
-        if quizzes[sender.tag].favourite == false {
-            quizzes[sender.tag].favourite = true
+        let cell = sender.superview?.superview as! QuizTableViewCell
+        let indexPath = tableView.indexPath(for: cell)
+
+        if quizzes[cell.id].favourite == false {
+            if pressedPUT(quizzes[cell.id].id) {
+                quizzes[cell.id].favourite = true
+            }
         } else {
-            quizzes[sender.tag].favourite = false
+            if pressedDELETE(quizzes[cell.id].id) {
+                quizzes[cell.id].favourite = false
+            }
         }
-        self.tableView.reloadData()
+        self.statusCode = false
+        self.tableView.reloadRows(at: [indexPath!], with: .fade)
     }
     
     
@@ -114,6 +121,61 @@ class QuizzesTableViewController: UITableViewController {
         downloadAllQuizzes(URLBASE)
     }
     
+    func pressedPUT(_ id: Int) -> Bool {
+        let urlPUT = "https://quiz2019.herokuapp.com/api/users/tokenOwner/favourites/\(id)?token=f2079b1d0cee0c8adbf2"
+        guard let url = URL(string: urlPUT) else {
+            print("Error 1")
+            return false
+        }
+        
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = "PUT"
+        
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+        
+        let task = session.dataTask(with: urlRequest, completionHandler: {
+          (data, response, error) in
+            if let response = response {
+                let httpResponse = response as! HTTPURLResponse
+                if httpResponse.statusCode == 200{
+                    self.statusCode = true
+                }
+            }
+        })
+        
+        task.resume()
+        return self.statusCode
+        
+    }
+    
+    func pressedDELETE(_ id: Int) -> Bool {
+        let urlDELETE = "https://quiz2019.herokuapp.com/api/users/tokenOwner/favourites/\(id)?token=f2079b1d0cee0c8adbf2"
+        
+        guard let url = URL(string: urlDELETE) else {
+            print("Error 1")
+            return false
+        }
+        
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = "DELETE"
+        
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+        
+        let task = session.dataTask(with: urlRequest, completionHandler: {
+            (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                if httpResponse.statusCode == 200 {
+                    self.statusCode = true
+                }
+            }
+        })
+        
+        task.resume()
+        
+        return self.statusCode
+    }
     
     func downloadAllQuizzes(_ url: String){
         guard let url = URL(string: url) else { return }

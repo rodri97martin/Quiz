@@ -15,5 +15,7 @@ class QuizTableViewCell: UITableViewCell {
     @IBOutlet weak var autorLabel: UILabel!
     @IBOutlet weak var favouriteButton: UIButton!
     
+    var id: Int!
+    
     
 }
