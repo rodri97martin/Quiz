@@ -52,7 +52,7 @@ class QuizViewController: UIViewController, UITextFieldDelegate {
         
         let URL_CHECK = "https://quiz2019.herokuapp.com/api/quizzes/\(quiz.id)/check?token=f2079b1d0cee0c8adbf2&answer=\(answerTextField.text ?? "")"
         
-        guard let url = URL(string: URL_CHECK) else { return }
+        guard let url = URL(string: URL_CHECK.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!) else { return }
         
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         DispatchQueue.global().async {
