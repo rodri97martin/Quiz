@@ -91,6 +91,13 @@ class Random10ViewController: UIViewController {
             score += 1
             if quizzesAsked < numberOfQuizzes {
                 play()
+            } else if quizzesAsked == numberOfQuizzes {
+                let ac = AlertController()
+                ac.showAlert("Perfecto: \(score)")
+                self.present(ac.alert!, animated: true)
+                score = 0
+                quizzesAsked = 0
+                downloadQuizzes()
             }
         } else {
             
