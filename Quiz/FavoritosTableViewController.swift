@@ -1,44 +1,19 @@
 //
-//  QuizzesTableViewController.swift
+//  FavoritosTableViewController.swift
 //  Quiz
 //
-//  Created by Rodrigo Martín Martín on 14/11/2018.
+//  Created by Rodrigo Martín Martín on 22/11/2018.
 //  Copyright © 2018 Rodri. All rights reserved.
 //
 
 import UIKit
 
-struct Attachment: Codable {
-    let filename: String
-    let mime: String
-    let url: String
-}
-
-struct Quiz: Codable {
-    let id: Int
-    let question: String
-    let author: Usuario?
-    let attachment: Attachment?
-    var favourite: Bool
-    let tips: [String]?
-}
-
-struct Quizzes_Page: Codable {
-    let quizzes: [Quiz]
-    let pageno: Int
-    let nextUrl: String?
-}
-
-class QuizzesTableViewController: UITableViewController {
+class FavoritosTableViewController: UITableViewController {
 
     let URLBASE = "https://quiz2019.herokuapp.com/api/quizzes?token=f2079b1d0cee0c8adbf2"
     var imagesCache = [String:UIImage]()
     var quizzes = [Quiz]()
     var statusCode = false
-    
-    @IBOutlet weak var refresh: UIBarButtonItem!
-    @IBOutlet weak var favButton: UIButton!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +23,7 @@ class QuizzesTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        
+    
         downloadAllQuizzes(URLBASE)
     }
 
@@ -63,10 +38,9 @@ class QuizzesTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return quizzes.count
     }
-
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Show Quizzes", for: indexPath) as! QuizTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Fav Cell", for: indexPath) as! FavoritosTableViewCell
 
         // Configure the cell...
         
@@ -76,7 +50,7 @@ class QuizzesTableViewController: UITableViewController {
         cell.autorLabel.text = quiz.author?.username ?? "Unknown"
         
         if let img = imagesCache[quiz.attachment?.url ?? ""] {
-
+            
             cell.quizImageView.image = img
         } else {
             
@@ -86,33 +60,10 @@ class QuizzesTableViewController: UITableViewController {
         
         cell.id = indexPath.row
         
-        if quiz.favourite == false {
-            cell.favouriteButton.imageView?.image = UIImage(named: "star2")
-        } else {
-            cell.favouriteButton.imageView?.image = UIImage(named: "star")
-        }
+        cell.favouriteButton.imageView?.image = UIImage(named: "star")
         
         return cell
     }
-    
-    @IBAction func setFavourite(_ sender: UIButton) {
-        
-        let cell = sender.superview?.superview as! QuizTableViewCell
-        let indexPath = tableView.indexPath(for: cell)
-
-        if quizzes[cell.id].favourite == false {
-            if pressedPUT(quizzes[cell.id].id) {
-                quizzes[cell.id].favourite = true
-            }
-        } else {
-            if pressedDELETE(quizzes[cell.id].id) {
-                quizzes[cell.id].favourite = false
-            }
-        }
-        self.statusCode = false
-        self.tableView.reloadRows(at: [indexPath!], with: .fade)
-    }
-    
     
     @IBAction func refresh(_ sender: UIBarButtonItem) {
         
@@ -121,60 +72,20 @@ class QuizzesTableViewController: UITableViewController {
         downloadAllQuizzes(URLBASE)
     }
     
-    func pressedPUT(_ id: Int) -> Bool {
-        let urlPUT = "https://quiz2019.herokuapp.com/api/users/tokenOwner/favourites/\(id)?token=f2079b1d0cee0c8adbf2"
-        guard let url = URL(string: urlPUT) else {
-            print("Error 1")
-            return false
+    
+    @IBAction func quitFavourite(_ sender: UIButton) {
+        
+        let cell = sender.superview?.superview as! FavoritosTableViewCell
+        
+        if pressedDELETE(quizzes[cell.id].id) {
+            quizzes[cell.id].favourite = false
         }
-        var urlRequest = URLRequest(url: url)
-        urlRequest.httpMethod = "PUT"
         
-        let config = URLSessionConfiguration.default
-        let session = URLSession(configuration: config)
-        
-        let task = session.dataTask(with: urlRequest, completionHandler: {
-          (data, response, error) in
-            if let response = response {
-                let httpResponse = response as! HTTPURLResponse
-                if httpResponse.statusCode == 200{
-                    self.statusCode = true
-                }
-            }
-        })
-        
-        task.resume()
-        return self.statusCode
-        
+        self.statusCode = false
+        self.quizzes.remove(at: cell.id)
+        self.tableView.reloadData()
     }
     
-    func pressedDELETE(_ id: Int) -> Bool {
-        let urlDELETE = "https://quiz2019.herokuapp.com/api/users/tokenOwner/favourites/\(id)?token=f2079b1d0cee0c8adbf2"
-        
-        guard let url = URL(string: urlDELETE) else {
-            print("Error 1")
-            return false
-        }
-        
-        var urlRequest = URLRequest(url: url)
-        urlRequest.httpMethod = "DELETE"
-        
-        let config = URLSessionConfiguration.default
-        let session = URLSession(configuration: config)
-        
-        let task = session.dataTask(with: urlRequest, completionHandler: {
-            (data, response, error) in
-            if let httpResponse = response as? HTTPURLResponse {
-                if httpResponse.statusCode == 200 {
-                    self.statusCode = true
-                }
-            }
-        })
-        
-        task.resume()
-        
-        return self.statusCode
-    }
     
     func downloadAllQuizzes(_ url: String){
         guard let url = URL(string: url) else { return }
@@ -189,8 +100,10 @@ class QuizzesTableViewController: UITableViewController {
                     DispatchQueue.main.async {
                         
                         for i in quizzesInThisPage.quizzes {
-                            self.quizzes.append(i)
-                            self.tableView.reloadData()
+                            if i.favourite == true {
+                                self.quizzes.append(i)
+                                self.tableView.reloadData()
+                            }
                         }
                         
                         if quizzesInThisPage.nextUrl != "" {
@@ -220,6 +133,34 @@ class QuizzesTableViewController: UITableViewController {
                 }
             }
         }
+    }
+    
+    func pressedDELETE(_ id: Int) -> Bool {
+        let urlDELETE = "https://quiz2019.herokuapp.com/api/users/tokenOwner/favourites/\(id)?token=f2079b1d0cee0c8adbf2"
+        
+        guard let url = URL(string: urlDELETE) else {
+            print("Error 1")
+            return false
+        }
+        
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = "DELETE"
+        
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+        
+        let task = session.dataTask(with: urlRequest, completionHandler: {
+            (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                if httpResponse.statusCode == 200 {
+                    self.statusCode = true
+                }
+            }
+        })
+        
+        task.resume()
+        
+        return self.statusCode
     }
 
     /*
@@ -257,19 +198,14 @@ class QuizzesTableViewController: UITableViewController {
     }
     */
 
-    
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == "Show Quiz" {
-            if let qvc = segue.destination as? QuizViewController {
-                
-                let quiz = quizzes[(tableView.indexPathForSelectedRow?.row)!]
-                
-                qvc.quiz = quiz
-                qvc.img = imagesCache[quiz.attachment?.url ?? ""]
-            }
-        }
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
     }
-    
+    */
 
 }
