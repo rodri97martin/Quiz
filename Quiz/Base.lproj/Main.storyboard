@@ -187,12 +187,25 @@
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Uq-jd-VtG">
+                                            <rect key="frame" x="346" y="0.0" width="30" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="30" id="Hmr-Ue-HVr"/>
+                                                <constraint firstAttribute="height" constant="30" id="OCA-bB-QGe"/>
+                                            </constraints>
+                                            <state key="normal" image="star"/>
+                                            <connections>
+                                                <action selector="setFavourite:" destination="3LN-7R-VY8" eventType="touchUpInside" id="En4-8F-eU8"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="Yoe-ub-jNq" secondAttribute="bottom" constant="2" id="1MA-63-nGt"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="eJK-go-T82" secondAttribute="bottom" id="3Gd-bY-0gJ"/>
                                         <constraint firstItem="eJK-go-T82" firstAttribute="top" secondItem="b8q-U6-23b" secondAttribute="bottom" constant="15" id="5Ef-Rj-1HN"/>
+                                        <constraint firstAttribute="trailing" secondItem="9Uq-jd-VtG" secondAttribute="trailing" id="6h0-T7-xTT"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="b8q-U6-23b" secondAttribute="bottom" constant="66" id="Cqb-g3-Vhl"/>
+                                        <constraint firstItem="9Uq-jd-VtG" firstAttribute="top" secondItem="iot-H7-7g5" secondAttribute="top" id="E4C-HU-3AQ"/>
                                         <constraint firstItem="Yoe-ub-jNq" firstAttribute="leading" secondItem="iot-H7-7g5" secondAttribute="leading" constant="2" id="KJv-VS-4pI"/>
                                         <constraint firstItem="eJK-go-T82" firstAttribute="leading" secondItem="Yoe-ub-jNq" secondAttribute="trailing" constant="10" id="hLB-w7-UGF"/>
                                         <constraint firstItem="Yoe-ub-jNq" firstAttribute="top" secondItem="iot-H7-7g5" secondAttribute="top" constant="2" id="j51-Ze-wqS"/>
@@ -204,6 +217,7 @@
                                 <color key="backgroundColor" red="0.53369126649999998" green="0.89541448680000002" blue="1" alpha="0.42223261439999998" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="autorLabel" destination="b8q-U6-23b" id="Qrp-e8-Ou5"/>
+                                    <outlet property="favouriteButton" destination="9Uq-jd-VtG" id="8oF-9T-Nl4"/>
                                     <outlet property="questionLabel" destination="eJK-go-T82" id="HXf-qZ-Xzj"/>
                                     <outlet property="quizImageView" destination="Yoe-ub-jNq" id="3O8-6m-947"/>
                                     <segue destination="cfb-mV-V8h" kind="show" identifier="Show Quiz" id="A38-0f-wWM"/>
@@ -355,7 +369,7 @@
         <scene sceneID="r7X-lA-8g8">
             <objects>
                 <navigationController id="NLZ-1Q-z35" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Todos" id="XL7-Gs-paJ"/>
+                    <tabBarItem key="tabBarItem" title="Todos" image="text-align-justify-7" id="XL7-Gs-paJ"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="MGN-4o-41x">
                         <rect key="frame" x="0.0" y="20" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -443,7 +457,7 @@
         <scene sceneID="TcC-aZ-0hq">
             <objects>
                 <navigationController title="Autores" automaticallyAdjustsScrollViewInsets="NO" id="dUl-TF-BpP" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Autores" id="YT3-il-5OR"/>
+                    <tabBarItem key="tabBarItem" title="Autores" image="woman-man-7" id="YT3-il-5OR"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="RVe-cf-sB1">
                         <rect key="frame" x="0.0" y="20" width="414" height="96"/>
@@ -465,7 +479,7 @@
         <scene sceneID="RDl-Fi-L3T">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9GV-vL-mCD" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Jugar" id="MED-Tx-7WL"/>
+                    <tabBarItem key="tabBarItem" title="Jugar" image="video-player-7" id="MED-Tx-7WL"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="cnL-qQ-S3a">
                         <rect key="frame" x="0.0" y="20" width="414" height="96"/>
@@ -579,7 +593,7 @@
         <scene sceneID="A85-2M-Ch1">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SbA-G7-7Ty" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="10" id="QpU-7f-Jid"/>
+                    <tabBarItem key="tabBarItem" title="10" image="number-10-7" id="QpU-7f-Jid"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="62K-o8-R9J">
                         <rect key="frame" x="0.0" y="20" width="414" height="96"/>
@@ -595,4 +609,11 @@
             <point key="canvasLocation" x="158" y="860"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="number-10-7" width="30" height="30"/>
+        <image name="star" width="43.115791320800781" height="43.115791320800781"/>
+        <image name="text-align-justify-7" width="30" height="30"/>
+        <image name="video-player-7" width="30" height="30"/>
+        <image name="woman-man-7" width="29" height="30"/>
+    </resources>
 </document>

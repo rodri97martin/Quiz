@@ -19,7 +19,7 @@ struct Quiz: Codable {
     let question: String
     let author: Usuario?
     let attachment: Attachment?
-    let favourite: Bool
+    var favourite: Bool
     let tips: [String]?
 }
 
@@ -36,6 +36,8 @@ class QuizzesTableViewController: UITableViewController {
     var quizzes = [Quiz]()
     
     @IBOutlet weak var refresh: UIBarButtonItem!
+    @IBOutlet weak var favButton: UIButton!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,8 +83,29 @@ class QuizzesTableViewController: UITableViewController {
             download(quiz.attachment?.url ?? "", index: indexPath)
         }
         
+        cell.favouriteButton.tag = indexPath.row
+        
+        if quiz.favourite == false {
+            cell.favouriteButton.imageView?.image = UIImage(named: "star2")
+        } else {
+            cell.favouriteButton.imageView?.image = UIImage(named: "star")
+        }
+        
         return cell
     }
+    
+    @IBAction func setFavourite(_ sender: UIButton) {
+        
+        print("Changing \(sender.tag) \(quizzes[sender.tag].favourite)")
+        
+        if quizzes[sender.tag].favourite == false {
+            quizzes[sender.tag].favourite = true
+        } else {
+            quizzes[sender.tag].favourite = false
+        }
+        self.tableView.reloadData()
+    }
+    
     
     @IBAction func refresh(_ sender: UIBarButtonItem) {
         
@@ -110,7 +133,6 @@ class QuizzesTableViewController: UITableViewController {
                         }
                         
                         if quizzesInThisPage.nextUrl != "" {
-                            print("Going to next URL")
                             self.downloadAllQuizzes(quizzesInThisPage.nextUrl!)
                         }
                         UIApplication.shared.isNetworkActivityIndicatorVisible = false
