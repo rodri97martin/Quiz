@@ -37,8 +37,6 @@ class QuizzesTableViewController: UITableViewController {
     var statusCode = false
     
     @IBOutlet weak var refresh: UIBarButtonItem!
-    @IBOutlet weak var favButton: UIButton!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
