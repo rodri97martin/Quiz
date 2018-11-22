@@ -44,6 +44,7 @@ class Random10ViewController: UIViewController {
         
         guard let url = URL(string: URLBASE) else { return }
     
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         DispatchQueue.global().async {
             
             if let data = try? Data(contentsOf: url){
@@ -55,9 +56,8 @@ class Random10ViewController: UIViewController {
                         self.quizzes = quizzes
                         self.play()
                         self.numberOfQuizzes = quizzes.count
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
                     }
-                } else {
-                    print("Error Decoder")
                 }
             }
         }
@@ -68,6 +68,7 @@ class Random10ViewController: UIViewController {
         answerTextField.text = ""
         scoreLabel.text = "Score: \(score)"
         
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         DispatchQueue.global().async {
             if let url = URL(string: (self.quizzes[self.quizzesAsked].attachment?.url)!),
                 let data = try? Data(contentsOf: url),
@@ -76,6 +77,8 @@ class Random10ViewController: UIViewController {
                 DispatchQueue.main.async {
                     
                     self.quizImageView.image = img
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
+
                 }
             }
         }

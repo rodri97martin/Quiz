@@ -40,6 +40,7 @@ class QuizViewController: UIViewController {
         
         guard let url = URL(string: URL_CHECK) else { return }
         
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         DispatchQueue.global().async {
             if let data = try? Data(contentsOf: url) {
                 
@@ -58,6 +59,7 @@ class QuizViewController: UIViewController {
                             self.present(ac.alert!, animated: true)
                             
                         }
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
                     }
                 }
             }

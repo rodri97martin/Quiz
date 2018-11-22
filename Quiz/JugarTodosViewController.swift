@@ -44,6 +44,7 @@ class JugarTodosViewController: UIViewController {
         
         guard let url = URL(string: url) else { return }
         
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         DispatchQueue.global().async {
             
             if let data = try? Data(contentsOf: url) {
@@ -63,6 +64,7 @@ class JugarTodosViewController: UIViewController {
                             self.quizImageView.image = img
                             
                         }
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
                     }
                 }
             }
@@ -77,7 +79,9 @@ class JugarTodosViewController: UIViewController {
         
         guard let url = URL(string: URL_CHECK) else { return }
         
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         DispatchQueue.global().async {
+            
             if let data = try? Data(contentsOf: url) {
                 
                 if let quiz = try? JSONDecoder().decode(randomQuizChecked.self, from: data) {
@@ -93,6 +97,7 @@ class JugarTodosViewController: UIViewController {
                             self.present(ac.alert!, animated: true)
                             self.play(self.URLNEW)
                         }
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
                     }
                 }
             }

@@ -95,7 +95,9 @@ class QuizzesTableViewController: UITableViewController {
     func downloadAllQuizzes(_ url: String){
         guard let url = URL(string: url) else { return }
         
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         DispatchQueue.global().async {
+            
             if let data = try? Data(contentsOf: url) {
                 
                 if let quizzesInThisPage = try? JSONDecoder().decode(Quizzes_Page.self, from: data) {
@@ -111,6 +113,7 @@ class QuizzesTableViewController: UITableViewController {
                             print("Going to next URL")
                             self.downloadAllQuizzes(quizzesInThisPage.nextUrl!)
                         }
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
                     }
                 }
             }
@@ -119,6 +122,7 @@ class QuizzesTableViewController: UITableViewController {
     
     func download(_ urls: String, index indexpath: IndexPath) {
         
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         DispatchQueue.global().async {
             
             if let url = URL(string: urls),
@@ -129,6 +133,7 @@ class QuizzesTableViewController: UITableViewController {
                     
                     self.imagesCache[urls] = img
                     self.tableView.reloadRows(at: [indexpath], with: .fade)
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 }
             }
         }
