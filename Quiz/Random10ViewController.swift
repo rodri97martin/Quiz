@@ -72,6 +72,8 @@ class Random10ViewController: UIViewController, UITextFieldDelegate {
                         UIApplication.shared.isNetworkActivityIndicatorVisible = false
                     }
                 }
+            } else {
+                self.downloadQuizzes()
             }
         }
     }

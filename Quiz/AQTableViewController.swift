@@ -92,12 +92,12 @@ class AQTableViewController: UITableViewController {
     
     
     func downloadAllQuizzes(_ url: String){
-        guard let url = URL(string: url) else { return }
+        guard let url2 = URL(string: url) else { return }
         
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         DispatchQueue.global().async {
             
-            if let data = try? Data(contentsOf: url) {
+            if let data = try? Data(contentsOf: url2) {
                 
                 if let quizzesInThisPage = try? JSONDecoder().decode(Quizzes_Page.self, from: data) {
                     
@@ -115,6 +115,8 @@ class AQTableViewController: UITableViewController {
                         UIApplication.shared.isNetworkActivityIndicatorVisible = false
                     }
                 }
+            } else {
+                self.downloadAllQuizzes(url)
             }
         }
     }

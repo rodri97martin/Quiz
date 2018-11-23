@@ -76,6 +76,8 @@ class QuizViewController: UIViewController, UITextFieldDelegate {
                         UIApplication.shared.isNetworkActivityIndicatorVisible = false
                     }
                 }
+            } else {
+                self.checkAnswer(self.checkButton)
             }
         }
     }

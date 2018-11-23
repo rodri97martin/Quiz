@@ -80,6 +80,8 @@ class JugarTodosViewController: UIViewController, UITextFieldDelegate {
                         UIApplication.shared.isNetworkActivityIndicatorVisible = false
                     }
                 }
+            } else {
+                self.play(self.URLNEW)
             }
         }
     }
@@ -113,6 +115,8 @@ class JugarTodosViewController: UIViewController, UITextFieldDelegate {
                         UIApplication.shared.isNetworkActivityIndicatorVisible = false
                     }
                 }
+            } else {
+                self.playNext(self.acceptButton)
             }
         }
     }

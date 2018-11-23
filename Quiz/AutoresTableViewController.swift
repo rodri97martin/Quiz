@@ -57,8 +57,6 @@ class AutoresTableViewController: UITableViewController {
         
         guard let url = URL(string: URLBASE) else { return }
         
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        
         DispatchQueue.global().async {
             
             if let data = try? Data(contentsOf: url) {
@@ -68,9 +66,10 @@ class AutoresTableViewController: UITableViewController {
                     DispatchQueue.main.async {
                         self.items = items
                         self.tableView.reloadData()
-                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
                     }
                 }
+            } else {
+                self.download()
             }
         }
     }
