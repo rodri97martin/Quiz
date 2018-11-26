@@ -20,7 +20,7 @@ struct Random10Quiz: Codable {
 
 class Random10ViewController: UIViewController, UITextFieldDelegate {
 
-    let URLBASE = "https://quiz2019.herokuapp.com/api/quizzes/random10wa?token=f2079b1d0cee0c8adbf2"
+    let URLBASE = "https://quiz2019.herokuapp.com/api/quizzes/random10wa?token=\(token)"
     var quizzes = [Random10Quiz]()
     var numberOfQuizzes = 0
     var quizzesAsked = 0

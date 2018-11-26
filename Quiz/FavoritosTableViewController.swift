@@ -10,7 +10,7 @@ import UIKit
 
 class FavoritosTableViewController: UITableViewController {
 
-    let URLBASE = "https://quiz2019.herokuapp.com/api/quizzes?token=f2079b1d0cee0c8adbf2"
+    let URLBASE = "https://quiz2019.herokuapp.com/api/quizzes?token=\(token)"
     var imagesCache = [String:UIImage]()
     var quizzes = [Quiz]()
     var statusCode = false
@@ -138,7 +138,7 @@ class FavoritosTableViewController: UITableViewController {
     }
     
     func pressedDELETE(_ id: Int) -> Bool {
-        let urlDELETE = "https://quiz2019.herokuapp.com/api/users/tokenOwner/favourites/\(id)?token=f2079b1d0cee0c8adbf2"
+        let urlDELETE = "https://quiz2019.herokuapp.com/api/users/tokenOwner/favourites/\(id)?token=\(token)"
         
         guard let url = URL(string: urlDELETE) else {
             print("Error 1")

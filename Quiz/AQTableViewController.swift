@@ -26,7 +26,7 @@ class AQTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         title = "Quizzes de \(autor ?? "Unknown")"
         
-        downloadAllQuizzes("https://quiz2019.herokuapp.com/api/users/\(id ?? 0)/quizzes?token=f2079b1d0cee0c8adbf2")
+        downloadAllQuizzes("https://quiz2019.herokuapp.com/api/users/\(id ?? 0)/quizzes?token=\(token)")
     }
     
     // MARK: - Table view data source
@@ -141,7 +141,7 @@ class AQTableViewController: UITableViewController {
     }
     
     func pressedPUT(_ id: Int) -> Bool {
-        let urlPUT = "https://quiz2019.herokuapp.com/api/users/tokenOwner/favourites/\(id)?token=f2079b1d0cee0c8adbf2"
+        let urlPUT = "https://quiz2019.herokuapp.com/api/users/tokenOwner/favourites/\(id)?token=\(token)"
         guard let url = URL(string: urlPUT) else {
             print("Error 1")
             return false
@@ -168,7 +168,7 @@ class AQTableViewController: UITableViewController {
     }
     
     func pressedDELETE(_ id: Int) -> Bool {
-        let urlDELETE = "https://quiz2019.herokuapp.com/api/users/tokenOwner/favourites/\(id)?token=f2079b1d0cee0c8adbf2"
+        let urlDELETE = "https://quiz2019.herokuapp.com/api/users/tokenOwner/favourites/\(id)?token=\(token)"
         
         guard let url = URL(string: urlDELETE) else {
             print("Error 1")

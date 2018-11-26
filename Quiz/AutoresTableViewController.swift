@@ -14,9 +14,11 @@ struct Usuario: Codable {
     let username: String?
 }
 
+let token = "a56673ed15ebc70ba6f2"
+
 class AutoresTableViewController: UITableViewController {
     
-    let URLBASE = "https://quiz2019.herokuapp.com/api/users?token=f2079b1d0cee0c8adbf2"
+    let URLBASE = "https://quiz2019.herokuapp.com/api/users?token=\(token)"
     
     var items = [Usuario]()
     

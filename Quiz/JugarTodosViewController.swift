@@ -22,8 +22,8 @@ struct randomQuizChecked: Codable {
 
 class JugarTodosViewController: UIViewController, UITextFieldDelegate {
 
-    let URLNEW = "https://quiz2019.herokuapp.com/api/quizzes/randomPlay/new?token=f2079b1d0cee0c8adbf2"
-    let URLNEXT = "https://quiz2019.herokuapp.com/api/quizzes/randomPlay/next?token=f2079b1d0cee0c8adbf2"
+    let URLNEW = "https://quiz2019.herokuapp.com/api/quizzes/randomPlay/new?token=\(token)"
+    let URLNEXT = "https://quiz2019.herokuapp.com/api/quizzes/randomPlay/next?token=\(token)"
     
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var answerTextField: UITextField!
@@ -90,7 +90,7 @@ class JugarTodosViewController: UIViewController, UITextFieldDelegate {
         
         let ac = AlertController()
         
-        let URL_CHECK = "https://quiz2019.herokuapp.com/api/quizzes/randomPlay/check?token=f2079b1d0cee0c8adbf2&answer=\(answerTextField.text ?? "")"
+        let URL_CHECK = "https://quiz2019.herokuapp.com/api/quizzes/randomPlay/check?token=\(token)&answer=\(answerTextField.text ?? "")"
         
         guard let url = URL(string: URL_CHECK.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!) else { return }
         

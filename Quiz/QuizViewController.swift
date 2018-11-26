@@ -50,7 +50,7 @@ class QuizViewController: UIViewController, UITextFieldDelegate {
         
         let ac = AlertController()
         
-        let URL_CHECK = "https://quiz2019.herokuapp.com/api/quizzes/\(quiz.id)/check?token=f2079b1d0cee0c8adbf2&answer=\(answerTextField.text ?? "")"
+        let URL_CHECK = "https://quiz2019.herokuapp.com/api/quizzes/\(quiz.id)/check?token=\(token)&answer=\(answerTextField.text ?? "")"
         
         guard let url = URL(string: URL_CHECK.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!) else { return }
         
